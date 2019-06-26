@@ -75,9 +75,9 @@ public class DateTool {
         return addToDate(new Date(),field, ToAdd);
     }
 
-    public static Date addToDate(Date currentDate, int field, int ToAdd)
+    public static Date addToDate(Date date, int field, int ToAdd)
     {
-        calendar.setTime(currentDate);
+        calendar.setTime(date);
         calendar.add(field, ToAdd);
         return calendar.getTime();
     }
