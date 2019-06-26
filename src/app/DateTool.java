@@ -14,33 +14,35 @@ public class DateTool {
         return addHoursToDate(new Date(), hoursToAdd);
     }
 
-    public static Date addHoursToDate(Date currentDate, int hoursToAdd)
+    public static Date addHoursToDate(Date date, int hoursToAdd)
     {
-        calendar.setTime(currentDate);
+        calendar.setTime(date);
         calendar.add(Calendar.HOUR, hoursToAdd);
         return calendar.getTime();
     }
 
-    public static String dateToString(Date currentDate, String format)
+    //------------------------------------------------------
+    // Methods of conversion dateToString -> stringToDate
+
+    public static String dateToString(Date date, String format)
     {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        String dateInMyFormat = simpleDateFormat.format(currentDate);
+        String dateInMyFormat = simpleDateFormat.format(date);
         return dateInMyFormat;
     }
 
     public static Date stringToDate(String dateAsString, String format)
     {
-        Date currentDate1= null;
+        Date date1= null;
         try {
-            currentDate1=new SimpleDateFormat(format).parse(dateAsString);
+            date1=new SimpleDateFormat(format).parse(dateAsString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return currentDate1;
+        return date1;
     }
-
-
-
+    //---------------------------------------
+    // Метод добавления значения к текущему часу
 
     public static Date addHoursToNow(int hoursToAdd)
     {
@@ -49,11 +51,16 @@ public class DateTool {
         return calendar.getTime();
     }
 
+    //-------------------------------------------------------------
+    // Метод добавления значения к текущему количеству минут
+
     public static Date addMinuteToNow(int minutesToAdd) {
         calendar.setTime(new Date());
         calendar.add(Calendar.MINUTE, minutesToAdd);
         return calendar.getTime();
     }
+
+    // Метод добавления значения к текущему значению дня
 
     public static Date addDayToNow(int daysToAdd) {
         calendar.setTime(new Date());
@@ -61,6 +68,22 @@ public class DateTool {
         return calendar.getTime();
     }
 
+    //----------------------------Universal methods addition of the fields------------------
+    // Универсальная функция добавления числового значения к полю времени (пример Calendar.Year)
+    public static Date addToDate(int field, int ToAdd)
+    {
+        return addToDate(new Date(),field, ToAdd);
+    }
+
+    public static Date addToDate(Date currentDate, int field, int ToAdd)
+    {
+        calendar.setTime(currentDate);
+        calendar.add(field, ToAdd);
+        return calendar.getTime();
+    }
+
+
+    //--------------------- main --------------------------------------
     public static void main(String[] args) {
         Date now = new Date();
         System.out.println(now);
@@ -89,16 +112,5 @@ public class DateTool {
 
     }
 
-    public static Date addToDate(int field, int ToAdd)
-    {
-        return addToDate(new Date(),field, ToAdd);
-    }
-
-    public static Date addToDate(Date currentDate, int field, int ToAdd)
-    {
-        calendar.setTime(currentDate);
-        calendar.add(field, ToAdd);
-        return calendar.getTime();
-    }
 
 }

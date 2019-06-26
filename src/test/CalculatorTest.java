@@ -1,6 +1,6 @@
 package test;
 
-import app.Calculator;
+import app_class.Calculator;
 import app.DateTool;
 import org.testng.Assert;
 import org.testng.annotations.Test;
