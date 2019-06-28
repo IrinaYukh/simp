@@ -7,7 +7,22 @@ import java.util.Date;
 
 public class DateTool {
 
-    private static final Calendar calendar = Calendar.getInstance();
+    private static Calendar calendar = Calendar.getInstance();
+
+    //----------------------------Universal methods addition of value to the field------------------
+    // Method for adding value to the time field (example Calendar.Year)
+    public static Date addToDate(int field, int valueToAdd)
+    {
+        return addToDate(new Date(),field, valueToAdd);
+    }
+
+    public static Date addToDate(Date date, int field, int valueToAdd)
+    {
+        calendar.setTime(date);
+        calendar.add(field, valueToAdd);
+        return calendar.getTime();
+    }
+
 
     public static Date addHoursToDate(int hoursToAdd)
     {
@@ -26,9 +41,18 @@ public class DateTool {
 
     public static String dateToString(Date date, String format)
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        String dateInMyFormat = simpleDateFormat.format(date);
-        return dateInMyFormat;
+        String dateInMyFormat = null;
+        try
+        {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+            dateInMyFormat = simpleDateFormat.format(date);
+            return dateInMyFormat;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Request format" + format + "is illegal");
+            throw e;
+        }
     }
 
     public static Date stringToDate(String dateAsString, String format)
@@ -41,8 +65,9 @@ public class DateTool {
         }
         return date1;
     }
+    
     //---------------------------------------
-    // Метод добавления значения к текущему часу
+    // Method of adding value to the current hour value
 
     public static Date addHoursToNow(int hoursToAdd)
     {
@@ -52,7 +77,7 @@ public class DateTool {
     }
 
     //-------------------------------------------------------------
-    // Метод добавления значения к текущему количеству минут
+    // Method of adding value to the current minutes value
 
     public static Date addMinuteToNow(int minutesToAdd) {
         calendar.setTime(new Date());
@@ -60,7 +85,7 @@ public class DateTool {
         return calendar.getTime();
     }
 
-    // Метод добавления значения к текущему значению дня
+    // Method of adding value to the current day value
 
     public static Date addDayToNow(int daysToAdd) {
         calendar.setTime(new Date());
@@ -68,18 +93,11 @@ public class DateTool {
         return calendar.getTime();
     }
 
-    //----------------------------Universal methods addition of the fields------------------
-    // Универсальная функция добавления числового значения к полю времени (пример Calendar.Year)
-    public static Date addToDate(int field, int ToAdd)
-    {
-        return addToDate(new Date(),field, ToAdd);
-    }
 
-    public static Date addToDate(Date date, int field, int ToAdd)
+
+    public static Date addDaysToDate(Date date, int valueToAdd)
     {
-        calendar.setTime(date);
-        calendar.add(field, ToAdd);
-        return calendar.getTime();
+        return addToDate(Calendar.DAY_OF_YEAR,2);
     }
 
 
